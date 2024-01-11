@@ -12,7 +12,7 @@ interface InternInterface {
 
 interface CommitmentInterface {
     text: string;
-    date: Date;
+    date: string;
 }
 
 interface GeneralInfoInterface {
@@ -43,14 +43,14 @@ interface CourseInterface {
     courseTitle: "Web" | "Machine Learning" | "C#";
     steps: StepInterface[];
     progress: number;
-    startDate: Date;
-    endDate: Date;
+    startDate: string;
+    endDate: string;
 }
 
 interface StepInterface {
-    startDate: Date;
-    promises: Date[];
-    completeDate: Date;
+    startDate: string;
+    promises: string[];
+    completeDate: string;
     studyItems: StudyItemInterface[];
     tasks: TaskInterface[];
     mentoringCourse: MentoringCourseInterface;
@@ -63,17 +63,17 @@ interface StepInterface {
 
 interface StudyItemInterface {
     title: string;
-    telegramPost: [string, Date][];
-    tweeterPost: [string, Date][];
-    linkedinPost: [string, Date][];
+    telegramPost: [string, string][];
+    tweeterPost: [string, string][];
+    linkedinPost: [string, string][];
     isDone: () => boolean;
 }
 
 interface TaskInterface {
     title: string;
-    telegramPost: [string, Date][];
-    tweeterPost: [string, Date][];
-    linkedinPost: [string, Date][];
+    telegramPost: [string, string][];
+    tweeterPost: [string, string][];
+    linkedinPost: [string, string][];
     jsfiddleLink?: string;
     githubLink?: string;
     isDone: () => boolean;
@@ -127,9 +127,9 @@ class Intern implements InternInterface {
 
 class Commitment implements CommitmentInterface {
     text: string;
-    date: Date;
+    date: string;
 
-    constructor(text: string, date: Date) {
+    constructor(text: string, date: string) {
         this.text = text;
         this.date = date;
     }
@@ -200,15 +200,15 @@ class Course implements CourseInterface {
     courseTitle: "Web" | "Machine Learning" | "C#";
     steps: StepInterface[];
     progress: number;
-    startDate: Date;
-    endDate: Date;
+    startDate: string;
+    endDate: string;
 
     constructor(
         courseTitle: "Web" | "Machine Learning" | "C#",
         steps: StepInterface[],
         progress: number,
-        startDate: Date,
-        endDate: Date
+        startDate: string,
+        endDate: string
     ) {
         this.courseTitle = courseTitle;
         this.steps = steps;
@@ -219,9 +219,9 @@ class Course implements CourseInterface {
 }
 
 class Step implements StepInterface {
-    startDate: Date;
-    promises: Date[];
-    completeDate: Date;
+    startDate: string;
+    promises: string[];
+    completeDate: string;
     studyItems: StudyItemInterface[];
     tasks: TaskInterface[];
     mentoringCourse: MentoringCourseInterface;
@@ -231,9 +231,9 @@ class Step implements StepInterface {
     mentorsNote: string[];
 
     constructor(
-        startDate: Date,
-        promises: Date[],
-        completeDate: Date,
+        startDate: string,
+        promises: string[],
+        completeDate: string,
         studyItems: StudyItemInterface[],
         tasks: TaskInterface[],
         mentoringCourse: MentoringCourseInterface,
@@ -261,15 +261,15 @@ class Step implements StepInterface {
 
 class StudyItem implements StudyItemInterface {
     title: string;
-    telegramPost: [string, Date][];
-    tweeterPost: [string, Date][];
-    linkedinPost: [string, Date][];
+    telegramPost: [string, string][];
+    tweeterPost: [string, string][];
+    linkedinPost: [string, string][];
 
     constructor(
         title: string,
-        telegramPost: [string, Date][],
-        tweeterPost: [string, Date][],
-        linkedinPost: [string, Date][]
+        telegramPost: [string, string][],
+        tweeterPost: [string, string][],
+        linkedinPost: [string, string][]
     ) {
         this.title = title;
         this.telegramPost = telegramPost;
@@ -284,17 +284,17 @@ class StudyItem implements StudyItemInterface {
 
 class Task implements TaskInterface {
     title: string;
-    telegramPost: [string, Date][];
-    tweeterPost: [string, Date][];
-    linkedinPost: [string, Date][];
+    telegramPost: [string, string][];
+    tweeterPost: [string, string][];
+    linkedinPost: [string, string][];
     jsfiddleLink?: string;
     githubLink?: string;
 
     constructor(
         title: string,
-        telegramPost: [string, Date][],
-        tweeterPost: [string, Date][],
-        linkedinPost: [string, Date][],
+        telegramPost: [string, string][],
+        tweeterPost: [string, string][],
+        linkedinPost: [string, string][],
         jsfiddleLink?: string,
         githubLink?: string
     ) {
@@ -337,3 +337,156 @@ class MentoringCourse implements MentoringCourseInterface {
         return true;
     }
 }
+
+function getRandomDate(start: Date, end: Date): string {
+    const randomDate = new Date(
+        start.getTime() + Math.random() * (end.getTime() - start.getTime())
+    );
+    return `${randomDate.getFullYear()}/${(randomDate.getMonth() + 1)
+        .toString()
+        .padStart(2, "0")}/${randomDate.getDate().toString().padStart(2, "0")}`;
+}
+
+const commitment = new Commitment(
+    "Commitment text",
+    getRandomDate(new Date(2023, 0, 1), new Date())
+);
+
+const generalInfo = new GeneralInfo(
+    "CityName",
+    "UniversityName",
+    "FieldOfStudy",
+    "Some experiences"
+);
+
+const contactInfo = new ContactInfo(
+    "123456789",
+    "ali@example.com",
+    "ali_telegram",
+    "ali_skype"
+);
+
+const socialLinks = new SocialLinks("#", "#", "#", "#", "#", "#", "#");
+
+const mentoringCourse = new MentoringCourse(
+    "Communication",
+    ["#video1", "#video2"],
+    ["#report1", "#report2"],
+    ["Note1", "Note2"]
+);
+
+const studyItems: StudyItemInterface[] = Array.from(
+    { length: 6 },
+    (_, studyItemIndex) => {
+        return new StudyItem(
+            `StudyItem${studyItemIndex + 1}`,
+            [
+                [
+                    "Telegram post",
+                    getRandomDate(new Date(2022, 0, 1), new Date()),
+                ],
+                [
+                    "Twitter post",
+                    getRandomDate(new Date(2022, 0, 1), new Date()),
+                ],
+                [
+                    "LinkedIn post",
+                    getRandomDate(new Date(2022, 0, 1), new Date()),
+                ],
+            ],
+            [
+                [
+                    "Telegram post",
+                    getRandomDate(new Date(2022, 0, 1), new Date()),
+                ],
+                [
+                    "Twitter post",
+                    getRandomDate(new Date(2022, 0, 1), new Date()),
+                ],
+                [
+                    "LinkedIn post",
+                    getRandomDate(new Date(2022, 0, 1), new Date()),
+                ],
+            ],
+            [
+                [
+                    "Telegram post",
+                    getRandomDate(new Date(2022, 0, 1), new Date()),
+                ],
+                [
+                    "Twitter post",
+                    getRandomDate(new Date(2022, 0, 1), new Date()),
+                ],
+                [
+                    "LinkedIn post",
+                    getRandomDate(new Date(2022, 0, 1), new Date()),
+                ],
+            ]
+        );
+    }
+);
+
+const tasks: TaskInterface[] = Array.from({ length: 7 }, (_, taskIndex) => {
+    return new Task(
+        `Task${taskIndex + 1}`,
+        [
+            ["Telegram post", getRandomDate(new Date(2022, 0, 1), new Date())],
+            ["Twitter post", getRandomDate(new Date(2022, 0, 1), new Date())],
+            ["LinkedIn post", getRandomDate(new Date(2022, 0, 1), new Date())],
+        ],
+        [
+            ["Telegram post", getRandomDate(new Date(2022, 0, 1), new Date())],
+            ["Twitter post", getRandomDate(new Date(2022, 0, 1), new Date())],
+            ["LinkedIn post", getRandomDate(new Date(2022, 0, 1), new Date())],
+        ],
+        [
+            ["Telegram post", getRandomDate(new Date(2022, 0, 1), new Date())],
+            ["Twitter post", getRandomDate(new Date(2022, 0, 1), new Date())],
+            ["LinkedIn post", getRandomDate(new Date(2022, 0, 1), new Date())],
+        ],
+        "#jsfiddleLink",
+        "#githubLink"
+    );
+});
+
+const steps: StepInterface[] = Array.from({ length: 10 }, (_, index) => {
+    return new Step(
+        getRandomDate(new Date(2022, 0, 1), new Date()),
+        [getRandomDate(new Date(2022, 0, 1), new Date())],
+        getRandomDate(new Date(2022, 0, 1), new Date()),
+        studyItems,
+        tasks,
+        mentoringCourse,
+        "#youtubeLink",
+        [`Coordinator note ${index + 1}`],
+        [`Technical mentor note ${index + 1}`],
+        [`Mentor note ${index + 1}`]
+    );
+});
+
+const course = new Course(
+    "Web",
+    steps,
+    0,
+    getRandomDate(new Date(2022, 0, 1), new Date()),
+    getRandomDate(new Date(2022, 0, 1), new Date())
+);
+
+const ali = new Intern(
+    "Ali",
+    course,
+    "Dog",
+    ["Coordinator1", "Coordinator2"],
+    commitment,
+    generalInfo,
+    contactInfo,
+    socialLinks
+);
+
+console.log(ali);
+
+const bigObj = document.querySelector(".bigObj") as HTMLElement;
+
+bigObj.innerHTML = JSON.stringify(ali, null, 2);
+
+console.log(bigObj.innerHTML);

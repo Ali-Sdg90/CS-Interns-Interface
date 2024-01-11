@@ -165,4 +165,81 @@ class MentoringCourse {
         return true;
     }
 }
+function getRandomDate(start, end) {
+    const randomDate = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    return `${randomDate.getFullYear()}/${(randomDate.getMonth() + 1)
+        .toString()
+        .padStart(2, "0")}/${randomDate.getDate().toString().padStart(2, "0")}`;
+}
+const commitment = new Commitment("Commitment text", getRandomDate(new Date(2023, 0, 1), new Date()));
+const generalInfo = new GeneralInfo("CityName", "UniversityName", "FieldOfStudy", "Some experiences");
+const contactInfo = new ContactInfo("123456789", "ali@example.com", "ali_telegram", "ali_skype");
+const socialLinks = new SocialLinks("#", "#", "#", "#", "#", "#", "#");
+const mentoringCourse = new MentoringCourse("Communication", ["#video1", "#video2"], ["#report1", "#report2"], ["Note1", "Note2"]);
+const studyItems = Array.from({ length: 6 }, (_, studyItemIndex) => {
+    return new StudyItem(`StudyItem${studyItemIndex + 1}`, [
+        [
+            "Telegram post",
+            getRandomDate(new Date(2022, 0, 1), new Date()),
+        ],
+        [
+            "Twitter post",
+            getRandomDate(new Date(2022, 0, 1), new Date()),
+        ],
+        [
+            "LinkedIn post",
+            getRandomDate(new Date(2022, 0, 1), new Date()),
+        ],
+    ], [
+        [
+            "Telegram post",
+            getRandomDate(new Date(2022, 0, 1), new Date()),
+        ],
+        [
+            "Twitter post",
+            getRandomDate(new Date(2022, 0, 1), new Date()),
+        ],
+        [
+            "LinkedIn post",
+            getRandomDate(new Date(2022, 0, 1), new Date()),
+        ],
+    ], [
+        [
+            "Telegram post",
+            getRandomDate(new Date(2022, 0, 1), new Date()),
+        ],
+        [
+            "Twitter post",
+            getRandomDate(new Date(2022, 0, 1), new Date()),
+        ],
+        [
+            "LinkedIn post",
+            getRandomDate(new Date(2022, 0, 1), new Date()),
+        ],
+    ]);
+});
+const tasks = Array.from({ length: 7 }, (_, taskIndex) => {
+    return new Task(`Task${taskIndex + 1}`, [
+        ["Telegram post", getRandomDate(new Date(2022, 0, 1), new Date())],
+        ["Twitter post", getRandomDate(new Date(2022, 0, 1), new Date())],
+        ["LinkedIn post", getRandomDate(new Date(2022, 0, 1), new Date())],
+    ], [
+        ["Telegram post", getRandomDate(new Date(2022, 0, 1), new Date())],
+        ["Twitter post", getRandomDate(new Date(2022, 0, 1), new Date())],
+        ["LinkedIn post", getRandomDate(new Date(2022, 0, 1), new Date())],
+    ], [
+        ["Telegram post", getRandomDate(new Date(2022, 0, 1), new Date())],
+        ["Twitter post", getRandomDate(new Date(2022, 0, 1), new Date())],
+        ["LinkedIn post", getRandomDate(new Date(2022, 0, 1), new Date())],
+    ], "#jsfiddleLink", "#githubLink");
+});
+const steps = Array.from({ length: 10 }, (_, index) => {
+    return new Step(getRandomDate(new Date(2022, 0, 1), new Date()), [getRandomDate(new Date(2022, 0, 1), new Date())], getRandomDate(new Date(2022, 0, 1), new Date()), studyItems, tasks, mentoringCourse, "#youtubeLink", [`Coordinator note ${index + 1}`], [`Technical mentor note ${index + 1}`], [`Mentor note ${index + 1}`]);
+});
+const course = new Course("Web", steps, 0, getRandomDate(new Date(2022, 0, 1), new Date()), getRandomDate(new Date(2022, 0, 1), new Date()));
+const ali = new Intern("Ali", course, "Dog", ["Coordinator1", "Coordinator2"], commitment, generalInfo, contactInfo, socialLinks);
+console.log(ali);
+const bigObj = document.querySelector(".bigObj");
+bigObj.innerHTML = JSON.stringify(ali, null, 2);
+console.log(bigObj.innerHTML);
 //# sourceMappingURL=index.js.map
