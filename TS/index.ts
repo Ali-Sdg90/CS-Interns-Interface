@@ -361,9 +361,9 @@ const generalInfo = new GeneralInfo(
 
 const contactInfo = new ContactInfo(
     "123456789",
-    "ali@example.com",
-    "ali_telegram",
-    "ali_skype"
+    "ali909392@gmail.com",
+    "@Ali_Sdg90",
+    "idk"
 );
 
 const socialLinks = new SocialLinks("#", "#", "#", "#", "#", "#", "#");
@@ -475,8 +475,13 @@ const course = new Course(
 const ali = new Intern(
     "Ali",
     course,
-    "Dog",
-    ["Coordinator1", "Coordinator2"],
+    "Cat",
+    [
+        "Mohsen Saniee",
+        "Mostafa Zeighami ",
+        "Ali Hesaraki",
+        "Faegheh Mohammadian",
+    ],
     commitment,
     generalInfo,
     contactInfo,
